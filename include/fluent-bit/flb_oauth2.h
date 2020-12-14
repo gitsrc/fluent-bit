@@ -23,6 +23,7 @@
 
 #include <fluent-bit/flb_info.h>
 #include <fluent-bit/flb_sds.h>
+#include <fluent-bit/tls/flb_tls.h>
 
 #define FLB_OAUTH2_PORT          "443"
 #define FLB_OAUTH2_HTTP_ENCODING "application/x-www-form-urlencoded"

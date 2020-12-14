@@ -88,7 +88,7 @@ struct flb_upstream {
 
 #ifdef FLB_HAVE_TLS
     /* context with mbedTLS data to handle certificates and keys */
-    struct flb_tls *tls;
+    void *tls; /* FIXME: used to be struct flb_tls *tls */
 #endif
 
     struct mk_list _head;

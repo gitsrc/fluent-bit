@@ -206,15 +206,15 @@ struct flb_oauth2 *flb_oauth2_create(struct flb_config *config,
     }
 
     /* Create TLS context */
-    ctx->tls.context = flb_tls_context_new(FLB_TRUE,  /* verify */
-                                           -1,        /* debug */
-                                           NULL,      /* vhost */
-                                           NULL,      /* ca_path */
-                                           NULL,      /* ca_file */
-                                           NULL,      /* crt_file */
-                                           NULL,      /* key_file */
-                                           NULL);     /* key_passwd */
-    if (!ctx->tls.context) {
+    ctx->tls = flb_tls_create(FLB_TRUE,  /* verify */
+                              -1,        /* debug */
+                              NULL,      /* vhost */
+                              NULL,      /* ca_path */
+                              NULL,      /* ca_file */
+                              NULL,      /* crt_file */
+                              NULL,      /* key_file */
+                              NULL);     /* key_passwd */
+    if (!ctx->tls) {
         flb_error("[oauth2] error initializing TLS context");
         goto error;
     }

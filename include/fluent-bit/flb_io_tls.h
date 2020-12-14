@@ -25,50 +25,9 @@
 
 #ifdef FLB_HAVE_TLS
 
-#include <mbedtls/net.h>
-#include <mbedtls/ssl.h>
-#include <mbedtls/entropy.h>
-#include <mbedtls/ctr_drbg.h>
-
 #define FLB_TLS_CA_ROOT          1
 #define FLB_TLS_CERT             2
 #define FLB_TLS_PRIV_KEY         4
-
-/* mbedTLS library context */
-struct flb_tls_context {
-    int verify;                    /* FLB_TRUE | FLB_FALSE      */
-    int debug;                     /* mbedtls debug level       */
-    char *vhost;                   /* Virtual hostname for SNI  */
-    uint16_t    certs_set;         /* CA_ROOT | CERT | PRIV_KEY */
-    mbedtls_x509_crt ca_cert;      /* CA Root      */
-    mbedtls_x509_crt cert;         /* Certificate  */
-    mbedtls_pk_context priv_key;   /* Private key  */
-    mbedtls_dhm_context dhm;
-    mbedtls_entropy_context entropy;
-    mbedtls_ctr_drbg_context ctr_drbg;
-};
-
-/* TLS connected session */
-struct flb_tls_session {
-    struct mbedtls_ssl_context ssl;
-    struct mbedtls_ssl_config conf;
-};
-
-/* TLS instance, library context + active sessions */
-struct flb_tls {
-    struct flb_tls_context *context;
-};
-
-struct flb_tls_context *flb_tls_context_new(int verify,
-                                            int debug,
-                                            const char *vhost,
-                                            const char *ca_path,
-                                            const char *ca_file, const char *crt_file,
-                                            const char *key_file, const char *key_passwd);
-
-void flb_tls_context_destroy(struct flb_tls_context *ctx);
-int flb_tls_session_destroy(struct flb_tls_session *session);
-int net_io_tls_handshake(void *u_conn, void *th);
 
 #endif /* FLB_HAVE_TLS */
 #endif
